@@ -1,0 +1,16 @@
+# ignore pycache
+**/__pycache__/
+
+
+# IntelliJ
+*.iml
+/.idea
+
+
+# python compiled files
+*.pyc
+
+# VSCode
+.vscode
+.DS_Store
+

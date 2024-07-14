@@ -1,0 +1,10 @@
+# we can specify the version as well, for now I haven't specified it
+aioredis
+beautifulsoup4
+fastapi
+pydantic
+requests
+uvicorn
+
+
+
