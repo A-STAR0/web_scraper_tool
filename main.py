@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Depends, HTTPException
 from typing import List
-from scraper.schemas import ScrapeSettings, Product
-from scrape_service import ScrapeService
-from auth import get_api_key
+from app.scraper.schemas import ScrapeSettings, Product
+from app.scrape_service import ScrapeService
+from app.auth import get_api_key
 
 app = FastAPI()
 

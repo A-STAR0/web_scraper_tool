@@ -1,9 +1,9 @@
 from typing import List
 
-from scraper.schemas import ScrapeSettings, Product
-from scraper.scraper_core import ScraperCore
-from scraper.db_ops.storage import Storage
-from scraper.notifier.notification import Notifier
+from app.scraper.schemas import ScrapeSettings, Product
+from app.scraper.scraper_core import ScraperCore
+from app.scraper.db_ops.storage import Storage
+from app.scraper.notifier.notification import Notifier
 
 
 class ScrapeService:
