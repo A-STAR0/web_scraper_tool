@@ -3,13 +3,16 @@ from typing import List
 from app.scraper.schemas import ScrapeSettings, Product
 from app.scraper.scraper_core import ScraperCore
 from app.scraper.db_ops.storage import Storage
-from app.scraper.notifier.notification import Notifier
+from app.scraper.notifier.notification_strategy import NotificationStrategy
+import logging
+logger = logging.getLogger(__name__)
 
 
 class ScrapeService:
+    def __init__(self, notifier: NotificationStrategy):
+        self.notifier = notifier
 
-    @staticmethod
-    def scrape_products(settings: ScrapeSettings) -> List[Product]:
+    def scrape_products(self, settings: ScrapeSettings) -> List[Product]:
         try:
             scraper = ScraperCore(settings)
             products = scraper.scrape_data()
@@ -20,8 +23,9 @@ class ScrapeService:
                     storage.add_or_update_product(product)
                     updated_products += 1
             storage.save_data()
-            Notifier().notify_scraping_summary(num_scraped=len(products), num_updated=updated_products)
+            message = f'Scraped {len(products)} products and updated {updated_products}in DB.'
+            self.notifier.notify(message=message)
             return products
         except Exception as e:
-            print(f"Error while scraping products: {str(e)}")
+            logger.error(f"Error while scraping products: {str(e)}")
             raise e
